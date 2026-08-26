@@ -3,139 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GSC Weekly Growth App</title>
+    <title>GSC | Informe de Coberturas</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <aside class="sidebar" aria-label="Navegacion principal">
-      <div class="brand">
-        <span class="brand-mark">GSC</span>
-        <div>
-          <strong>Weekly Growth</strong>
-          <small>Leads digitales</small>
-        </div>
-      </div>
-      <nav>
-        <a href="#dashboard" class="active">Dashboard</a>
-        <a href="#programas">Programas</a>
-        <a href="#fuentes">Fuentes</a>
-        <a href="#campana">Campaña</a>
-      </nav>
-      <div class="side-note">
-        <span>Viernes</span>
-        <strong>8:00 a.m.</strong>
-        <small>Guatemala</small>
-      </div>
-    </aside>
-
-    <main>
-      <section id="dashboard" class="hero">
-        <div>
-          <p class="eyebrow">Panel semanal</p>
-          <h1>Orden semanal para atacar leads digitales</h1>
-          <p class="hero-copy">
-            Primero se decide que programa necesita accion. Luego se revisan leads digitales,
-            directos, pruebas y la recomendacion de pauta/publicaciones.
-          </p>
-        </div>
-        <div class="status-pill">GSC Analytics + Meta Ads + Redes</div>
-      </section>
-
-      <section class="kpi-grid" aria-label="Indicadores principales">
-        <article class="kpi danger">
-          <span>Prioridad #1</span>
-          <strong>Baby Juve</strong>
-          <small>Sin leads digitales visibles</small>
-        </article>
-        <article class="kpi blue">
-          <span>Leads digitales</span>
-          <strong>33</strong>
-          <small>Mayo 2026 · 3 sem</small>
-        </article>
-        <article class="kpi indigo">
-          <span>Leads directos</span>
-          <strong>353</strong>
-          <small>Mayo 2026 · 3 sem</small>
-        </article>
-        <article class="kpi warning">
-          <span>% digital</span>
-          <strong>9%</strong>
-          <small>Digital / total leads</small>
-        </article>
-        <article class="kpi purple">
-          <span>Clases de prueba</span>
-          <strong>41</strong>
-          <small>Senal de calidad</small>
-        </article>
-        <article class="kpi neutral">
-          <span>Instagram sin publicar</span>
-          <strong>Pte.</strong>
-          <small>Dias desde ultimo post</small>
-        </article>
-      </section>
-
-      <section id="programas" class="panel">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">Matriz de decisión</p>
-            <h2>Prioridad, leads y acción por programa</h2>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar hero-panel">
+          <img
+            class="header-logo"
+            src="./assets/logo-gsc.png"
+            alt="GSC Sports Corporation"
+          />
+          <div class="hero-title">
+            <p class="eyebrow">Control interno 2026</p>
+            <h1>Coberturas</h1>
           </div>
-          <div class="legend">
-            <span class="dot red"></span> Atacar
-            <span class="dot orange"></span> Crecer
-            <span class="dot yellow"></span> Ajustar
-            <span class="dot green"></span> Escalar
-            <span class="dot blue"></span> Optimizar
+          <div class="topbar-actions">
+            <button id="refreshSheets" class="icon-button" type="button" aria-label="Actualizar desde Sheets" title="Actualizar desde Sheets">
+              ↻
+            </button>
           </div>
-        </div>
-        <div class="program-list" id="programList"></div>
-      </section>
+          <p class="sync-feedback" id="syncFeedback">Listo para sincronizar con el Google Sheet real.</p>
+        </header>
 
-      <section id="fuentes" class="source-grid">
-        <article class="source-card">
-          <span>GSC Analytics</span>
-          <p>
-            Corte de mayo: 33 leads digitales vs 353 directos. GBA lidera el canal digital,
-            Baby Juve no registra leads y GSA/JAG/Nido dependen casi totalmente del directo.
-          </p>
-        </article>
-        <article class="source-card">
-          <span>Meta Ads</span>
-          <p>
-            Revisar inversion, CPL, leads por academia, anuncios ganadores y anuncios a pausar
-            antes de cerrar presupuesto semanal.
-          </p>
-        </article>
-        <article class="source-card">
-          <span>Redes sociales</span>
-          <p>
-            Revisar fecha de ultima publicacion, dias sin publicar, frecuencia, formatos, hooks,
-            CTAs, comentarios, piezas fuertes y piezas faltantes por academia. Este dato sigue
-            pendiente porque no aparece en GSC Analytics.
-          </p>
-        </article>
-      </section>
-
-      <section id="campana" class="campaign">
-        <div class="campaign-copy">
-          <p class="eyebrow">Agente de campaña semanal</p>
-          <h2>Crear campaña semanal GSC</h2>
-          <p>
-            Usa la prioridad del informe para producir objetivo, copys, hooks, visual, CTA,
-            pauta recomendada y checklist de ejecucion.
-          </p>
-        </div>
-        <button id="buildCampaign" type="button">Generar campaña</button>
-      </section>
-
-      <section class="panel campaign-output" id="campaignOutput" aria-live="polite" hidden>
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">Campaña sugerida</p>
-            <h2>Lista para ejecutar</h2>
+        <section class="current-week-panel" aria-label="Agenda por semana">
+          <div class="current-week-heading">
+            <div>
+              <p class="eyebrow">Agenda del equipo</p>
+              <h2>Agenda por semana</h2>
+            </div>
+            <div class="agenda-controls">
+              <span id="currentWeekLabel"></span>
+              <div class="agenda-week-row" id="agendaWeekButtons" aria-label="Semana de agenda"></div>
+            </div>
           </div>
-        </div>
-        <div id="campaignDetails"></div>
+          <div class="schedule-grid" id="currentWeekRows"></div>
+        </section>
+
+        <section class="filter-block" aria-label="Filtros">
+          <select id="personFilter" class="sr-only" aria-label="Persona"></select>
+          <select id="monthFilter" class="sr-only" aria-label="Mes"></select>
+          <select id="semesterFilter" class="sr-only" aria-label="Semana"></select>
+
+          <div class="filter-card people-filter">
+            <span class="filter-caption">Persona</span>
+            <div class="person-switcher" id="personButtons" aria-label="Personas"></div>
+          </div>
+          <div class="filter-card month-filter">
+            <span class="filter-caption">Mes</span>
+            <div class="chip-row" id="monthButtons" aria-label="Mes"></div>
+          </div>
+          <div class="filter-card">
+            <span class="filter-caption">Semana</span>
+            <div class="chip-row compact" id="semesterButtons" aria-label="Semana"></div>
+          </div>
+        </section>
+
+        <section class="view is-active" id="dashboardView">
+          <div class="kpi-grid" id="kpiGrid"></div>
+
+          <section class="panel person-panel">
+            <div class="panel-heading">
+              <h2>Resumen de facturación</h2>
+              <span id="personCardsLabel"></span>
+            </div>
+            <div class="person-grid" id="personCards"></div>
+          </section>
+
+          <div class="report-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Por semana</h2>
+                <span id="weekTotalLabel"></span>
+              </div>
+              <div class="week-grid" id="weekGrid"></div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Detalle filtrado</h2>
+              <span id="recordCountLabel"></span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Responsable</th>
+                    <th>Cobertura</th>
+                    <th>Sede</th>
+                    <th>Programa</th>
+                    <th>Conteo</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="recordsTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel consolidated-panel">
+            <div class="panel-heading">
+              <h2>Totales del equipo</h2>
+              <span id="periodTotalLabel"></span>
+            </div>
+            <div class="period-grid" id="periodGrid"></div>
+          </section>
+        </section>
       </section>
     </main>
 
