@@ -1,30 +1,15 @@
-# GSC Weekly Growth App
+# GSC Coberturas
 
-App semanal para convertir el análisis de GSC Analytics, Meta Ads y redes sociales en decisiones claras por academia:
+Dashboard interno para revisar coberturas del media team de GSC.
 
-- prioridad de ataque
-- análisis por marca
-- sugerencias de publicaciones
-- pauta recomendada
-- campaña semanal ejecutable
+La app permite:
 
-## Publicar en GitHub
+- sincronizar datos desde el Google Sheet real de coberturas;
+- filtrar por Gabriel, Josue y Daniel;
+- revisar coberturas por mes y por semana segun las semanas colocadas en Sheets;
+- calcular facturacion a Q250 por cobertura realizada;
+- ver la agenda semanal en formato profesional para screenshot.
 
-```bash
-git init
-git add .
-git commit -m "Create GSC weekly growth app"
-git branch -M main
-git remote add origin <URL_DEL_REPO>
-git push -u origin main
-```
+## Publicacion
 
-## Publicar en Vercel
-
-1. Conecta el repositorio de GitHub en Vercel.
-2. Framework preset: `Other`.
-3. Build command: dejar vacío.
-4. Output directory: dejar vacío.
-5. Deploy.
-
-La app es estática y funciona directamente desde `index.html`.
+Proyecto estatico para Vercel. No requiere build.
