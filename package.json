@@ -1,10 +1,10 @@
 {
-  "name": "gsc-weekly-growth-app",
+  "name": "gsc-coberturas-app",
   "version": "1.0.0",
   "private": true,
-  "description": "App semanal para priorizar leads digitales, pauta y publicaciones de Global Sports Corporation.",
+  "description": "Dashboard para registrar y analizar coberturas del media team GSC.",
   "scripts": {
-    "start": "python3 -m http.server 4173",
-    "dev": "python3 -m http.server 4173"
+    "start": "python3 -m http.server 4174",
+    "dev": "python3 -m http.server 4174"
   }
 }
