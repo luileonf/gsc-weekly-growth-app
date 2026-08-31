@@ -5,6 +5,42 @@
     GOOGLE_SHEET_TABS.push({ name: "Septiembre", gid: "195641769" });
   }
 
+  if (Array.isArray(TEAM_MEMBERS) && !TEAM_MEMBERS.includes("Pendiente")) {
+    TEAM_MEMBERS.push("Pendiente");
+  }
+
+  TEAM_MEMBER_LABELS.Pendiente = "Pendiente";
+
+  const logoStyle = document.createElement("style");
+  logoStyle.textContent = `
+    .header-logo {
+      width: min(340px, 48vw) !important;
+      max-height: 96px !important;
+      filter:
+        drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+        drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55)) !important;
+    }
+  `;
+  document.head.appendChild(logoStyle);
+
+  const originalNormalizePersonName = normalizePersonName;
+  normalizePersonName = function normalizePendingPersonName(value) {
+    const normalized = normalizeForMatch(value);
+    if (normalized.includes("pendiente") || normalized.includes("por definir")) {
+      return "Pendiente";
+    }
+    return originalNormalizePersonName(value);
+  };
+
+  const originalBuildRecord = buildRecord;
+  buildRecord = function buildPendingAwareRecord(formData) {
+    const record = originalBuildRecord(formData);
+    if (record.person === "Pendiente") {
+      record.status = "Pendiente";
+    }
+    return record;
+  };
+
   function localDate(dateValue) {
     const date = new Date(`${dateValue}T00:00:00`);
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
