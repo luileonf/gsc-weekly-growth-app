@@ -9,33 +9,26 @@
   <body>
     <main class="app-shell">
       <section class="workspace">
-        <header class="topbar hero-panel">
-          <img
-            class="header-logo"
-            src="./assets/logo-gsc.png"
-            alt="GSC Sports Corporation"
-          />
-          <div class="hero-title">
-            <p class="eyebrow">Control interno 2026</p>
-            <h1>Coberturas</h1>
-          </div>
-          <div class="topbar-actions">
-            <button id="refreshSheets" class="icon-button" type="button" aria-label="Actualizar desde Sheets" title="Actualizar desde Sheets">
-              ↻
-            </button>
-          </div>
-          <p class="sync-feedback" id="syncFeedback">Listo para sincronizar con el Google Sheet real.</p>
-        </header>
-
         <section class="current-week-panel" aria-label="Agenda por semana">
           <div class="current-week-heading">
-            <div>
-              <p class="eyebrow">Agenda del equipo</p>
-              <h2>Agenda por semana</h2>
+            <div class="agenda-brand">
+              <img
+                class="agenda-logo"
+                src="./assets/logo-gsc.png"
+                alt="GSC Sports Corporation"
+              />
+              <div>
+                <p class="eyebrow">Agenda del equipo</p>
+                <h2>Agenda por semana</h2>
+              </div>
             </div>
             <div class="agenda-controls">
               <span id="currentWeekLabel"></span>
+              <button id="refreshSheets" class="icon-button agenda-refresh" type="button" aria-label="Actualizar desde Sheets" title="Actualizar desde Sheets">
+                ↻
+              </button>
               <div class="agenda-week-row" id="agendaWeekButtons" aria-label="Semana de agenda"></div>
+              <p class="sync-feedback agenda-sync" id="syncFeedback">Listo para sincronizar con el Google Sheet real.</p>
             </div>
           </div>
           <div class="schedule-grid" id="currentWeekRows"></div>

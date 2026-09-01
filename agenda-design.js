@@ -18,41 +18,32 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 34px;
-      min-height: 122px;
-      padding: 24px 38px;
+      gap: 30px;
+      min-height: 104px;
+      padding: 20px 34px;
       border-bottom: 1px solid rgba(255, 73, 35, 0.22);
       background:
         linear-gradient(90deg, rgba(255, 73, 35, 0.08), transparent 44%),
         rgba(0, 0, 0, 0.18);
     }
 
-    .current-week-heading > div:first-child {
+    .agenda-brand {
       position: relative;
       display: grid;
-      grid-template-columns: 78px minmax(280px, 1fr);
+      grid-template-columns: 132px minmax(260px, 1fr);
       align-items: center;
-      column-gap: 20px;
+      column-gap: 18px;
       min-width: 0;
-      padding-right: 34px;
+      padding-right: 30px;
       border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .current-week-heading > div:first-child::before {
-      content: "GSC";
-      grid-row: 1 / 3;
-      width: 62px;
-      height: 72px;
-      display: grid;
-      place-items: center;
-      border: 2px solid #ff4a2f;
-      clip-path: polygon(50% 0, 93% 16%, 86% 69%, 50% 100%, 14% 69%, 7% 16%);
-      color: #ff4a2f;
-      background: rgba(0, 0, 0, 0.34);
-      font-size: 13px;
-      font-weight: 950;
-      letter-spacing: 0;
-      box-shadow: 0 0 28px rgba(255, 73, 35, 0.16);
+    .agenda-logo {
+      width: 132px;
+      max-height: 48px;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.42));
     }
 
     .current-week-heading .eyebrow {
@@ -67,7 +58,7 @@
     .current-week-heading h2 {
       margin: 0;
       color: #f7f4ef;
-      font-size: clamp(28px, 4.2vw, 43px);
+      font-size: clamp(26px, 3.6vw, 39px);
       line-height: 0.94;
       font-weight: 950;
       letter-spacing: 0;
@@ -77,18 +68,19 @@
 
     .agenda-controls {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto minmax(190px, 1fr) auto;
       align-items: center;
       justify-items: stretch;
-      gap: 18px 26px;
-      min-width: min(610px, 48vw);
+      gap: 9px 16px;
+      min-width: min(640px, 50vw);
     }
 
     .agenda-controls::before {
       content: "";
+      grid-column: 1;
       grid-row: 1 / 3;
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       border-radius: 8px;
       background:
         linear-gradient(#ff4a2f 0 0) 50% 29% / 22px 3px no-repeat,
@@ -99,7 +91,33 @@
     }
 
     #currentWeekLabel {
+      grid-column: 2;
+      grid-row: 1;
       text-align: left;
+    }
+
+    .agenda-refresh {
+      grid-column: 3;
+      grid-row: 1;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 73, 35, 0.72);
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff7a1f, #ff2e3f);
+      font-size: 21px;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(255, 54, 44, 0.25);
+    }
+
+    .agenda-sync {
+      grid-column: 2 / 4;
+      grid-row: 3;
+      margin: -2px 0 0;
+      color: rgba(247, 244, 239, 0.48);
+      font-size: 10px;
+      font-weight: 750;
+      text-align: right;
     }
 
     .agenda-period-label {
@@ -124,20 +142,22 @@
     }
 
     .agenda-week-row {
+      grid-column: 2 / 4;
+      grid-row: 2;
       display: flex;
       justify-content: end;
-      gap: 18px;
+      gap: 10px;
     }
 
     .agenda-week-chip {
-      min-width: 78px;
-      min-height: 46px;
+      min-width: 68px;
+      min-height: 40px;
       border: 1px solid rgba(255, 73, 35, 0.64);
       border-radius: 999px;
-      padding: 8px 18px;
+      padding: 7px 16px;
       color: #f7f4ef;
       background: rgba(2, 2, 2, 0.36);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 950;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.38);
     }
@@ -154,12 +174,12 @@
     .schedule-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-      padding: 26px 38px 22px;
+      gap: 20px;
+      padding: 22px 34px 18px;
     }
 
     .schedule-day {
-      min-height: 430px;
+      min-height: 360px;
       padding: 0;
       border: 0;
       border-radius: 0;
@@ -174,15 +194,15 @@
 
     .schedule-day-header {
       display: grid;
-      grid-template-columns: 72px minmax(0, 1fr);
+      grid-template-columns: 58px minmax(0, 1fr);
       align-items: center;
-      gap: 20px;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 10px;
     }
 
     .schedule-day-icon {
-      width: 54px;
-      height: 54px;
+      width: 44px;
+      height: 44px;
       display: grid;
       place-items: center;
       border-radius: 8px;
@@ -199,10 +219,10 @@
       display: grid;
       grid-template-columns: auto 1fr;
       align-items: center;
-      gap: 22px;
+      gap: 16px;
       margin: 0;
       color: #f7f4ef;
-      font-size: clamp(20px, 2.4vw, 28px);
+      font-size: clamp(18px, 2vw, 25px);
       line-height: 1;
       font-weight: 950;
       letter-spacing: 0;
@@ -218,16 +238,16 @@
 
     .schedule-items {
       display: grid;
-      gap: 10px;
+      gap: 9px;
     }
 
     .schedule-item {
       display: grid;
-      grid-template-columns: 96px minmax(0, 1fr) minmax(168px, 210px);
+      grid-template-columns: 74px minmax(0, 1fr) minmax(148px, 190px);
       align-items: center;
-      gap: 20px;
-      min-height: 112px;
-      padding: 14px 18px;
+      gap: 14px;
+      min-height: 88px;
+      padding: 10px 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-left: 4px solid #ff4a2f;
       border-radius: 8px;
@@ -240,8 +260,8 @@
     }
 
     .competition-badge {
-      width: 78px;
-      height: 78px;
+      width: 60px;
+      height: 60px;
       display: grid;
       place-items: center;
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -250,7 +270,7 @@
       background:
         radial-gradient(circle at 35% 20%, rgba(255, 90, 42, 0.1), transparent 34%),
         #050606;
-      font-size: 30px;
+      font-size: 22px;
       font-weight: 950;
       box-shadow:
         inset 0 0 0 1px rgba(255, 255, 255, 0.03),
@@ -258,7 +278,7 @@
     }
 
     .competition-badge.has-logo {
-      padding: 11px;
+      padding: 8px;
       overflow: hidden;
     }
 
@@ -280,12 +300,12 @@
     .schedule-title {
       display: block;
       min-height: 0;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       padding: 0;
       border-radius: 0;
       color: #ff8318;
       background: transparent;
-      font-size: clamp(17px, 1.5vw, 22px);
+      font-size: clamp(14px, 1.2vw, 18px);
       font-weight: 950;
       line-height: 1.08;
       text-align: left;
@@ -294,22 +314,22 @@
 
     .schedule-details {
       display: grid;
-      gap: 7px;
+      gap: 4px;
     }
 
     .schedule-item p {
       margin: 0;
       color: #f7f4ef;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.2;
       font-weight: 500;
     }
 
     .schedule-item small {
-      min-width: 85px;
-      margin-right: 8px;
+      min-width: 76px;
+      margin-right: 7px;
       color: rgba(247, 244, 239, 0.66);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 850;
       letter-spacing: 0;
       text-transform: uppercase;
@@ -317,18 +337,18 @@
 
     .schedule-item strong {
       color: #f7f4ef;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 650;
     }
 
     .schedule-meta {
       display: grid;
-      gap: 13px;
+      gap: 9px;
       margin: 0;
-      padding-left: 18px;
+      padding-left: 14px;
       border-left: 1px solid rgba(255, 255, 255, 0.14);
       color: #f7f4ef;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
     }
 
@@ -414,10 +434,10 @@
         flex-direction: column;
       }
 
-      .current-week-heading > div:first-child {
+      .agenda-brand {
         width: 100%;
         padding-right: 0;
-        padding-bottom: 18px;
+        padding-bottom: 16px;
         border-right: 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       }
@@ -442,15 +462,14 @@
         padding: 18px;
       }
 
-      .current-week-heading > div:first-child {
-        grid-template-columns: 58px minmax(0, 1fr);
+      .agenda-brand {
+        grid-template-columns: 104px minmax(0, 1fr);
         column-gap: 14px;
       }
 
-      .current-week-heading > div:first-child::before {
-        width: 48px;
-        height: 56px;
-        font-size: 10px;
+      .agenda-logo {
+        width: 104px;
+        max-height: 40px;
       }
 
       .current-week-heading h2 {
@@ -458,7 +477,7 @@
       }
 
       .agenda-controls {
-        grid-template-columns: 40px 1fr;
+        grid-template-columns: 40px 1fr auto;
       }
 
       .agenda-controls::before {
@@ -467,9 +486,15 @@
       }
 
       .agenda-week-row {
+        grid-column: 1 / -1;
         justify-content: flex-start;
         flex-wrap: wrap;
         gap: 8px;
+      }
+
+      .agenda-sync {
+        grid-column: 1 / -1;
+        text-align: left;
       }
 
       .agenda-week-chip {
@@ -499,9 +524,9 @@
 
       .schedule-item {
         grid-template-columns: 64px minmax(0, 1fr);
-        gap: 14px;
+        gap: 12px;
         min-height: 0;
-        padding: 13px;
+        padding: 12px;
       }
 
       .competition-badge {
