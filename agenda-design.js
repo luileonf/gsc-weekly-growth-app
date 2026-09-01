@@ -229,6 +229,22 @@
       font-size: 16px;
     }
 
+    .competition-badge.has-logo {
+      overflow: hidden;
+      padding: 8px;
+      background:
+        radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.12), transparent 32%),
+        #0d0d0c;
+    }
+
+    .competition-logo {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.34));
+    }
+
     .schedule-title {
       justify-content: flex-start;
       min-height: auto;
@@ -393,9 +409,25 @@
   }
 
   function getCompetitionBadge(record) {
+    const program = normalizeForMatch(record.program);
     const text = normalizeForMatch([record.coverage, record.program, record.type].join(" "));
-    if (text.includes("gba")) {
-      return { label: "GBA", kind: "gba" };
+    if (program.includes("copa cima") || text.includes("copa cima")) {
+      return { label: "Copa Cima", kind: "copa-cima", logo: "./assets/programs/copa-cima.webp" };
+    }
+    if (program.includes("tercera") || text.includes("tercera division")) {
+      return { label: "Tercera Division", kind: "tercera-division", logo: "./assets/programs/tercera-division.webp" };
+    }
+    if (program.includes("juventus") || text.includes("juventus academy")) {
+      return { label: "Juventus Academy", kind: "juventus-academy", logo: "./assets/programs/juventus-academy.webp" };
+    }
+    if (program === "gsa" || text.includes("global sports academy") || text.includes("gsa")) {
+      return { label: "GSA", kind: "gsa", logo: "./assets/programs/gsa.webp" };
+    }
+    if (program === "gba" || text.includes("global basketball academy") || text.includes("gba")) {
+      return { label: "GBA", kind: "gba", logo: "./assets/programs/gba.webp" };
+    }
+    if (program.includes("liga estudiantil") || text.includes("liga estudiantil")) {
+      return { label: "Liga Estudiantil", kind: "liga-estudiantil", logo: "./assets/programs/liga-estudiantil.webp" };
     }
     if (text.includes("academ") || text.includes("academy")) {
       return { label: "▰", kind: "academy" };
@@ -454,9 +486,12 @@
 
   function renderPremiumScheduleItem(record) {
     const badge = getCompetitionBadge(record);
+    const badgeContent = badge.logo
+      ? `<img class="competition-logo" src="${escapeHtml(badge.logo)}" alt="${escapeHtml(badge.label)}" />`
+      : escapeHtml(badge.label);
     return `
       <section class="schedule-item">
-        <div class="competition-badge" data-kind="${escapeHtml(badge.kind)}">${escapeHtml(badge.label)}</div>
+        <div class="competition-badge ${badge.logo ? "has-logo" : ""}" data-kind="${escapeHtml(badge.kind)}">${badgeContent}</div>
         <div class="schedule-title"><span></span>${escapeHtml(record.coverage)}</div>
         <div class="schedule-details">
           <p><small>Encargado:</small> <strong>${escapeHtml(record.person)}</strong></p>
