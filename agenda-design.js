@@ -4,146 +4,180 @@
   const style = document.createElement("style");
   style.textContent = `
     .current-week-panel {
-      position: relative;
       overflow: hidden;
-      border-color: rgba(255, 190, 64, 0.24);
+      border: 1px solid rgba(255, 73, 35, 0.28);
+      border-radius: 8px;
       background:
-        radial-gradient(circle at 18% 0%, rgba(255, 202, 85, 0.14), transparent 34%),
-        linear-gradient(135deg, rgba(7, 9, 9, 0.98), rgba(23, 18, 15, 0.96));
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+        radial-gradient(circle at 14% 0%, rgba(255, 73, 35, 0.12), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 22%),
+        #070807;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
     }
 
     .current-week-heading {
-      min-height: 104px;
-      padding: 18px 22px;
-      border-bottom: 1px solid rgba(255, 190, 64, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 34px;
+      min-height: 122px;
+      padding: 24px 38px;
+      border-bottom: 1px solid rgba(255, 73, 35, 0.22);
+      background:
+        linear-gradient(90deg, rgba(255, 73, 35, 0.08), transparent 44%),
+        rgba(0, 0, 0, 0.18);
     }
 
     .current-week-heading > div:first-child {
       position: relative;
       display: grid;
-      grid-template-columns: 82px auto;
+      grid-template-columns: 78px minmax(280px, 1fr);
       align-items: center;
-      column-gap: 18px;
+      column-gap: 20px;
+      min-width: 0;
+      padding-right: 34px;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .current-week-heading > div:first-child::before {
-      content: "▣";
-      width: 74px;
-      height: 74px;
+      content: "GSC";
+      grid-row: 1 / 3;
+      width: 62px;
+      height: 72px;
       display: grid;
       place-items: center;
-      grid-row: 1 / 3;
-      border: 1px solid rgba(255, 190, 64, 0.5);
-      border-radius: 20px;
-      color: var(--amber);
-      background:
-        linear-gradient(145deg, rgba(255, 211, 106, 0.14), rgba(0, 0, 0, 0.34)),
-        rgba(8, 8, 8, 0.7);
-      box-shadow: inset 0 0 22px rgba(255, 190, 64, 0.08);
-      font-size: 32px;
+      border: 2px solid #ff4a2f;
+      clip-path: polygon(50% 0, 93% 16%, 86% 69%, 50% 100%, 14% 69%, 7% 16%);
+      color: #ff4a2f;
+      background: rgba(0, 0, 0, 0.34);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0;
+      box-shadow: 0 0 28px rgba(255, 73, 35, 0.16);
     }
 
     .current-week-heading .eyebrow {
-      margin: 0;
-      align-self: end;
-      color: var(--amber);
-      font-size: 13px;
+      margin: 0 0 4px;
+      color: #ff5a32;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
     }
 
     .current-week-heading h2 {
-      position: relative;
       margin: 0;
-      padding-bottom: 11px;
-      color: var(--ink);
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .current-week-heading h2::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 88px;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--amber), transparent);
+      color: #f7f4ef;
+      font-size: clamp(28px, 4.2vw, 43px);
+      line-height: 0.94;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.48);
     }
 
     .agenda-controls {
-      gap: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      justify-items: stretch;
+      gap: 18px 26px;
+      min-width: min(610px, 48vw);
     }
 
-    .current-week-heading span {
-      color: rgba(251, 247, 240, 0.88);
-      font-size: 14px;
+    .agenda-controls::before {
+      content: "";
+      grid-row: 1 / 3;
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background:
+        linear-gradient(#ff4a2f 0 0) 50% 29% / 22px 3px no-repeat,
+        linear-gradient(#ff4a2f 0 0) 50% 50% / 22px 3px no-repeat,
+        linear-gradient(#ff4a2f 0 0) 50% 71% / 22px 3px no-repeat,
+        rgba(255, 73, 35, 0.11);
+      box-shadow: inset 0 0 0 1px rgba(255, 73, 35, 0.22);
+    }
+
+    #currentWeekLabel {
+      text-align: left;
+    }
+
+    .agenda-period-label {
+      display: grid;
+      gap: 5px;
+    }
+
+    .agenda-period-main {
+      color: #f7f4ef;
+      font-size: 16px;
+      font-weight: 950;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .agenda-period-range {
+      color: rgba(247, 244, 239, 0.7);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
     .agenda-week-row {
-      gap: 12px;
+      display: flex;
+      justify-content: end;
+      gap: 18px;
     }
 
     .agenda-week-chip {
-      min-width: 74px;
-      min-height: 42px;
-      border-color: rgba(255, 255, 255, 0.13);
-      background: rgba(0, 0, 0, 0.24);
-      font-size: 15px;
+      min-width: 78px;
+      min-height: 46px;
+      border: 1px solid rgba(255, 73, 35, 0.64);
+      border-radius: 999px;
+      padding: 8px 18px;
+      color: #f7f4ef;
+      background: rgba(2, 2, 2, 0.36);
+      font-size: 16px;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.38);
     }
 
     .agenda-week-chip.is-active {
-      box-shadow: 0 14px 34px rgba(255, 150, 38, 0.26);
+      color: #fff;
+      border-color: rgba(255, 92, 45, 0.94);
+      background: linear-gradient(135deg, #ff7a1f, #ff2e3f);
+      box-shadow:
+        0 10px 30px rgba(255, 54, 44, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .schedule-grid {
-      grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
-      gap: 16px;
-      padding: 16px 22px 22px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      padding: 26px 38px 22px;
     }
 
     .schedule-day {
-      position: relative;
-      min-height: 310px;
-      overflow: hidden;
-      padding: 18px 26px 20px;
-      border: 1px solid rgba(255, 190, 64, 0.2);
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, rgba(255, 211, 106, 0.08), transparent 28%),
-        linear-gradient(145deg, rgba(69, 52, 41, 0.9), rgba(21, 16, 13, 0.94));
+      min-height: 430px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
+    .schedule-day::before,
     .schedule-day::after {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto auto;
-      width: 190px;
-      height: 86px;
-      opacity: 0.16;
-      background: repeating-linear-gradient(135deg, var(--amber) 0 8px, transparent 8px 18px);
-      pointer-events: none;
-    }
-
-    .schedule-day::before {
-      content: "⚽";
-      position: absolute;
-      right: 16%;
-      bottom: 18px;
-      color: rgba(255, 211, 106, 0.05);
-      font-size: 180px;
-      line-height: 1;
-      pointer-events: none;
+      display: none;
     }
 
     .schedule-day-header {
-      position: relative;
-      z-index: 1;
       display: grid;
-      grid-template-columns: 58px 1fr;
+      grid-template-columns: 72px minmax(0, 1fr);
       align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 20px;
+      margin-bottom: 14px;
     }
 
     .schedule-day-icon {
@@ -151,90 +185,81 @@
       height: 54px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255, 190, 64, 0.58);
-      border-radius: 13px;
-      color: var(--amber);
-      background: rgba(7, 7, 7, 0.55);
-      font-size: 25px;
+      border-radius: 8px;
+      background:
+        linear-gradient(#ff4a2f 0 0) 50% 29% / 24px 3px no-repeat,
+        linear-gradient(#ff4a2f 0 0) 50% 50% / 24px 3px no-repeat,
+        linear-gradient(#ff4a2f 0 0) 50% 71% / 24px 3px no-repeat,
+        linear-gradient(135deg, rgba(255, 72, 45, 0.28), rgba(255, 40, 45, 0.08));
+      box-shadow: inset 0 0 0 1px rgba(255, 73, 35, 0.16);
+      font-size: 0;
     }
 
     .schedule-day h3 {
-      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 22px;
       margin: 0;
-      padding-bottom: 12px;
-      text-align: left;
+      color: #f7f4ef;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: 0;
       text-transform: uppercase;
-      font-size: 22px;
-      line-height: 1.05;
+      text-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
     }
 
     .schedule-day h3::after {
       content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 58px;
-      height: 3px;
-      border-radius: 999px;
-      background: var(--amber);
+      height: 2px;
+      background: linear-gradient(90deg, #ff4a2f, transparent);
     }
 
     .schedule-items {
-      position: relative;
-      z-index: 1;
+      display: grid;
       gap: 10px;
     }
 
     .schedule-item {
-      position: relative;
       display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 0 20px;
-      padding: 18px 22px 16px;
-      border: 1px solid rgba(255, 190, 64, 0.16);
-      border-left: 3px solid #35d246;
+      grid-template-columns: 96px minmax(0, 1fr) minmax(168px, 210px);
+      align-items: center;
+      gap: 20px;
+      min-height: 112px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: 4px solid #ff4a2f;
       border-radius: 8px;
       background:
-        linear-gradient(135deg, rgba(255, 211, 106, 0.05), transparent 42%),
-        rgba(17, 13, 11, 0.72);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-    }
-
-    .schedule-item:last-child {
-      border-bottom: 1px solid rgba(255, 190, 64, 0.16);
+        linear-gradient(135deg, rgba(255, 83, 37, 0.045), transparent 46%),
+        rgba(7, 8, 7, 0.84);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.045),
+        0 12px 26px rgba(0, 0, 0, 0.22);
     }
 
     .competition-badge {
-      grid-row: 1 / 4;
-      align-self: center;
-      width: 68px;
-      height: 68px;
+      width: 78px;
+      height: 78px;
       display: grid;
       place-items: center;
-      border: 2px solid rgba(255, 200, 74, 0.78);
-      border-radius: 50%;
-      color: var(--amber);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      color: #ff8a16;
       background:
-        radial-gradient(circle at 34% 24%, rgba(255, 211, 106, 0.2), transparent 36%),
-        #11100e;
-      box-shadow:
-        inset 0 0 18px rgba(255, 211, 106, 0.1),
-        0 8px 18px rgba(0, 0, 0, 0.32);
-      font-size: 28px;
+        radial-gradient(circle at 35% 20%, rgba(255, 90, 42, 0.1), transparent 34%),
+        #050606;
+      font-size: 30px;
       font-weight: 950;
-      letter-spacing: 0;
-    }
-
-    .competition-badge[data-kind="gba"] {
-      font-size: 16px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 8px 20px rgba(0, 0, 0, 0.26);
     }
 
     .competition-badge.has-logo {
+      padding: 11px;
       overflow: hidden;
-      padding: 8px;
-      background:
-        radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.12), transparent 32%),
-        #0d0d0c;
     }
 
     .competition-logo {
@@ -242,133 +267,262 @@
       height: 100%;
       display: block;
       object-fit: contain;
-      filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.34));
+      filter:
+        saturate(1.08)
+        contrast(1.05)
+        drop-shadow(0 6px 10px rgba(0, 0, 0, 0.46));
+    }
+
+    .schedule-copy {
+      min-width: 0;
     }
 
     .schedule-title {
-      justify-content: flex-start;
-      min-height: auto;
+      display: block;
+      min-height: 0;
+      margin-bottom: 14px;
       padding: 0;
+      border-radius: 0;
+      color: #ff8318;
       background: transparent;
-      font-size: 17px;
-      line-height: 1.15;
+      font-size: clamp(17px, 1.5vw, 22px);
+      font-weight: 950;
+      line-height: 1.08;
       text-align: left;
-    }
-
-    .schedule-title span {
-      flex: 0 0 auto;
-      width: 14px;
-      height: 14px;
-      box-shadow: 0 0 0 4px rgba(70, 211, 62, 0.11);
+      text-transform: uppercase;
     }
 
     .schedule-details {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 24px;
-      margin-top: 14px;
-      padding-bottom: 13px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      gap: 7px;
     }
 
     .schedule-item p {
-      min-width: 0;
-      font-size: 13px;
+      margin: 0;
+      color: #f7f4ef;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 500;
     }
 
     .schedule-item small {
-      display: inline-block;
+      min-width: 85px;
       margin-right: 8px;
-      color: rgba(251, 247, 240, 0.63);
-      font-size: 10px;
+      color: rgba(247, 244, 239, 0.66);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-transform: uppercase;
     }
 
     .schedule-item strong {
-      font-size: 14px;
+      color: #f7f4ef;
+      font-size: 15px;
+      font-weight: 650;
     }
 
     .schedule-meta {
-      grid-column: 2;
-      margin-top: 12px;
-      gap: 20px;
+      display: grid;
+      gap: 13px;
+      margin: 0;
+      padding-left: 18px;
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+      color: #f7f4ef;
       font-size: 15px;
+      font-weight: 700;
+    }
+
+    .schedule-meta span {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .schedule-meta span::before {
+      content: "";
+      width: 13px;
+      height: 13px;
+      border: 2px solid #ff4a2f;
+      border-radius: 50%;
     }
 
     .schedule-meta span:first-child::before {
-      content: "◷";
-      font-size: 18px;
+      content: "";
+      color: transparent;
+      font-size: 0;
     }
 
     .schedule-meta span:last-child::before {
-      content: "⌖";
-      font-size: 17px;
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: #ff4a2f;
+      transform: rotate(45deg);
     }
 
-    @media (max-width: 760px) {
+    .schedule-empty {
+      grid-column: 1 / -1;
+      padding: 18px;
+      border: 1px solid rgba(255, 73, 35, 0.22);
+      border-radius: 8px;
+      color: rgba(247, 244, 239, 0.7);
+      background: rgba(255, 255, 255, 0.035);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .agenda-footer {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin: 12px -38px -22px;
+      padding: 20px;
+      border-top: 1px solid rgba(255, 73, 35, 0.28);
+      color: rgba(247, 244, 239, 0.86);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.56em;
+      text-transform: uppercase;
+    }
+
+    .agenda-footer::before {
+      content: "GSC";
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 32px;
+      border: 1px solid #ff4a2f;
+      clip-path: polygon(50% 0, 93% 16%, 86% 69%, 50% 100%, 14% 69%, 7% 16%);
+      color: #ff4a2f;
+      font-size: 7px;
+      letter-spacing: 0;
+    }
+
+    .agenda-footer span {
+      color: #ff4a2f;
+      letter-spacing: 0.2em;
+    }
+
+    @media (max-width: 1040px) {
       .current-week-heading {
-        padding: 16px;
+        align-items: start;
+        flex-direction: column;
       }
 
       .current-week-heading > div:first-child {
-        grid-template-columns: 58px auto;
+        width: 100%;
+        padding-right: 0;
+        padding-bottom: 18px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       }
 
-      .current-week-heading > div:first-child::before {
-        width: 50px;
-        height: 50px;
-        border-radius: 14px;
-        font-size: 23px;
-      }
-
-      .current-week-heading h2 {
-        font-size: 20px;
+      .agenda-controls {
+        width: 100%;
+        min-width: 0;
       }
 
       .schedule-grid {
         grid-template-columns: 1fr;
-        padding: 12px;
       }
 
       .schedule-day {
-        min-height: auto;
-        padding: 14px;
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .current-week-heading {
+        min-height: 0;
+        padding: 18px;
+      }
+
+      .current-week-heading > div:first-child {
+        grid-template-columns: 58px minmax(0, 1fr);
+        column-gap: 14px;
+      }
+
+      .current-week-heading > div:first-child::before {
+        width: 48px;
+        height: 56px;
+        font-size: 10px;
+      }
+
+      .current-week-heading h2 {
+        font-size: 28px;
+      }
+
+      .agenda-controls {
+        grid-template-columns: 40px 1fr;
+      }
+
+      .agenda-controls::before {
+        width: 40px;
+        height: 40px;
+      }
+
+      .agenda-week-row {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .agenda-week-chip {
+        min-width: 54px;
+        min-height: 38px;
+        font-size: 14px;
+      }
+
+      .schedule-grid {
+        padding: 18px;
       }
 
       .schedule-day-header {
-        grid-template-columns: 48px 1fr;
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
       }
 
       .schedule-day-icon {
-        width: 44px;
-        height: 44px;
+        width: 42px;
+        height: 42px;
       }
 
       .schedule-day h3 {
-        font-size: 19px;
+        gap: 12px;
+        font-size: 20px;
       }
 
       .schedule-item {
-        grid-template-columns: 62px 1fr;
-        gap: 0 13px;
-        padding: 14px;
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 14px;
+        min-height: 0;
+        padding: 13px;
       }
 
       .competition-badge {
-        width: 52px;
-        height: 52px;
-        font-size: 22px;
-      }
-
-      .competition-badge[data-kind="gba"] {
-        font-size: 13px;
-      }
-
-      .schedule-details {
-        grid-template-columns: 1fr;
+        width: 58px;
+        height: 58px;
       }
 
       .schedule-meta {
         grid-column: 1 / -1;
+        padding-left: 0;
+        padding-top: 10px;
+        border-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .agenda-footer {
+        margin: 6px -18px -18px;
+        padding: 16px;
+        gap: 10px;
+        font-size: 10px;
+        letter-spacing: 0.24em;
       }
     }
   `;
@@ -408,6 +562,27 @@
     return weeks;
   }
 
+  function formatShortWeekDate(date) {
+    return new Intl.DateTimeFormat("es-GT", {
+      day: "numeric",
+      month: "short",
+    }).format(date);
+  }
+
+  function renderAgendaPeriodLabel(monthIndex, selectedWeek, selectedWeekRange) {
+    const weekCode = formatSheetWeekLabel(selectedWeek) || "Semana";
+    const rangeLabel = selectedWeekRange
+      ? `${formatShortWeekDate(selectedWeekRange.start)} - ${formatShortWeekDate(selectedWeekRange.end)}`
+      : "";
+
+    return `
+      <span class="agenda-period-label">
+        <span class="agenda-period-main">${escapeHtml(getAgendaMonthLabel(monthIndex))} · ${escapeHtml(weekCode)}</span>
+        <span class="agenda-period-range">${escapeHtml(rangeLabel)}</span>
+      </span>
+    `;
+  }
+
   function getCompetitionBadge(record) {
     const program = normalizeForMatch(record.program);
     const text = normalizeForMatch([record.coverage, record.program, record.type].join(" "));
@@ -429,16 +604,7 @@
     if (program.includes("liga estudiantil") || text.includes("liga estudiantil")) {
       return { label: "Liga Estudiantil", kind: "liga-estudiantil", logo: "./assets/programs/liga-estudiantil.webp" };
     }
-    if (text.includes("academ") || text.includes("academy")) {
-      return { label: "▰", kind: "academy" };
-    }
-    if (text.includes("jag") || text.includes("cantera") || text.includes("futbol")) {
-      return { label: "●", kind: "football" };
-    }
-    if (text.includes("copa") || text.includes("torneo") || text.includes("division")) {
-      return { label: "♕", kind: "cup" };
-    }
-    return { label: "★", kind: "general" };
+    return { label: "GSC", kind: "general" };
   }
 
   function getStartMinutes(timeValue) {
@@ -489,13 +655,16 @@
     const badgeContent = badge.logo
       ? `<img class="competition-logo" src="${escapeHtml(badge.logo)}" alt="${escapeHtml(badge.label)}" />`
       : escapeHtml(badge.label);
+
     return `
       <section class="schedule-item">
         <div class="competition-badge ${badge.logo ? "has-logo" : ""}" data-kind="${escapeHtml(badge.kind)}">${badgeContent}</div>
-        <div class="schedule-title"><span></span>${escapeHtml(record.coverage)}</div>
-        <div class="schedule-details">
-          <p><small>Encargado:</small> <strong>${escapeHtml(record.person)}</strong></p>
-          <p><small>Programa:</small> <strong>${escapeHtml(record.program || "Sin programa")}</strong></p>
+        <div class="schedule-copy">
+          <div class="schedule-title">${escapeHtml(record.coverage)}</div>
+          <div class="schedule-details">
+            <p><small>Encargado:</small> <strong>${escapeHtml(record.person)}</strong></p>
+            <p><small>Programa:</small> <strong>${escapeHtml(record.program || "Sin programa")}</strong></p>
+          </div>
         </div>
         <div class="schedule-meta">
           <span>${escapeHtml(record.time || "Pendiente")}</span>
@@ -516,15 +685,18 @@
       .sort(compareRecordsBySchedule);
 
     renderAgendaWeekButtons(availableWeeks, selectedWeek);
-    document.querySelector("#currentWeekLabel").textContent =
-      `${getAgendaMonthLabel(monthIndex)} · ${formatSheetWeekTitle(selectedWeek) || "Sin semana"} · ${weeklyRecords.length} filas`;
+    document.querySelector("#currentWeekLabel").innerHTML = renderAgendaPeriodLabel(
+      monthIndex,
+      selectedWeek,
+      selectedWeekRange,
+    );
     document.querySelector("#currentWeekRows").innerHTML = weeklyRecords.length
-      ? Object.entries(groupBy(weeklyRecords, (record) => record.date))
+      ? `${Object.entries(groupBy(weeklyRecords, (record) => record.date))
           .map(
             ([date, items]) => `
               <article class="schedule-day">
                 <div class="schedule-day-header">
-                  <div class="schedule-day-icon">▣</div>
+                  <div class="schedule-day-icon">Agenda</div>
                   <h3>${escapeHtml(formatScheduleDay(date))}</h3>
                 </div>
                 <div class="schedule-items">
@@ -533,7 +705,8 @@
               </article>
             `,
           )
-          .join("")
+          .join("")}
+          <div class="agenda-footer">Planificamos <span>·</span> Organizamos <span>·</span> Competimos</div>`
       : `<div class="schedule-empty">Sin coberturas registradas para esta semana.</div>`;
   };
 
