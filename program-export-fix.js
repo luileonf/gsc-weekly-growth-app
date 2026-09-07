@@ -627,6 +627,7 @@
       if (!button) {
         return;
       }
+      event.stopPropagation();
       getProgramFilterElement().value = button.dataset.program;
       render();
     });
