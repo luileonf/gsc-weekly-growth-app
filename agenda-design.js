@@ -30,7 +30,7 @@
     .agenda-brand {
       position: relative;
       display: grid;
-      grid-template-columns: 132px minmax(260px, 1fr);
+      grid-template-columns: 172px minmax(260px, 1fr);
       align-items: center;
       column-gap: 18px;
       min-width: 0;
@@ -39,8 +39,8 @@
     }
 
     .agenda-logo {
-      width: 132px;
-      max-height: 48px;
+      width: 172px;
+      max-height: 62px;
       display: block;
       object-fit: contain;
       filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.42));
@@ -463,13 +463,13 @@
       }
 
       .agenda-brand {
-        grid-template-columns: 104px minmax(0, 1fr);
+        grid-template-columns: 132px minmax(0, 1fr);
         column-gap: 14px;
       }
 
       .agenda-logo {
-        width: 104px;
-        max-height: 40px;
+        width: 132px;
+        max-height: 50px;
       }
 
       .current-week-heading h2 {
