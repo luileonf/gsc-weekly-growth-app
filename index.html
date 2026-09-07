@@ -28,6 +28,7 @@
                 ↻
               </button>
               <div class="agenda-week-row" id="agendaWeekButtons" aria-label="Semana de agenda"></div>
+              <button id="downloadAgenda" class="download-agenda-button" type="button">Descargar agenda semanal</button>
               <p class="sync-feedback agenda-sync" id="syncFeedback">Listo para sincronizar con el Google Sheet real.</p>
             </div>
           </div>
@@ -38,6 +39,7 @@
           <select id="personFilter" class="sr-only" aria-label="Persona"></select>
           <select id="monthFilter" class="sr-only" aria-label="Mes"></select>
           <select id="semesterFilter" class="sr-only" aria-label="Semana"></select>
+          <select id="programFilter" class="sr-only" aria-label="Programa"></select>
 
           <div class="filter-card people-filter">
             <span class="filter-caption">Persona</span>
@@ -50,6 +52,10 @@
           <div class="filter-card">
             <span class="filter-caption">Semana</span>
             <div class="chip-row compact" id="semesterButtons" aria-label="Semana"></div>
+          </div>
+          <div class="filter-card program-filter">
+            <span class="filter-caption">Programa</span>
+            <div class="chip-row" id="programButtons" aria-label="Programa"></div>
           </div>
         </section>
 
@@ -114,5 +120,6 @@
     <script src="./sort-fix.js"></script>
     <script src="./agenda-design.js"></script>
     <script src="./dynamic-team-fix.js"></script>
+    <script src="./program-export-fix.js"></script>
   </body>
 </html>
